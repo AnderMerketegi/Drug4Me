@@ -1,0 +1,4 @@
+[pharmgkb]
+name = "pharmgkb"
+download_path = "https://api.pharmgkb.org/v1/download/file/data/clinicalAnnotations.zip"
+data_path = "data/PharmGKB/files/"
