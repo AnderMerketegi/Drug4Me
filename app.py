@@ -6,7 +6,7 @@ from data.PharmGKB.pharmgkb import PharmGKB
 from agents.csv_agent import CSVAgent
 
 # Download data and convert to csv format
-[data.download() for data in [PharmGKB(), EMA()]]
+_ = [data.download() for data in [PharmGKB(), EMA()]]
 
 # Create CSV agent
 csv_agent = CSVAgent()
