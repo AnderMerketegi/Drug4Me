@@ -5,41 +5,19 @@ import pandas as pd
 import requests
 import zipfile
 from io import BytesIO
-from data.data import Data
+from data.dataset import Dataset
 from sqlalchemy import create_engine
-from utils.utils import read_file, tsv_to_csv
+from utils.utils import read_file, convert_files_to_csv
 from langchain_community.utilities import SQLDatabase
 
 
-class PharmGKB(Data):
+class PharmGKB(Dataset):
 
     def __init__(self):
 
         super().__init__()
         self.properties = self.properties["pharmgkb"]
-
-    def download(self, convert_to_csv=True):
-
-        # Skip download if files exist
-        if len(glob(self.properties["data_path"] + "*sv")) > 0:
-            print("-- Skipping data download --\n")
-            return
-
-        # Make request
-        response = requests.get(self.properties["download_path"])
-        response.raise_for_status()
-        # Get content and unzip file
-        if response.status_code == 200:
-            zip_file = zipfile.ZipFile(BytesIO(response.content))
-            zip_file.extractall(self.properties["data_path"])
-
-            time.sleep(3)
-
-            # Convert tsv files to csv format
-            if convert_to_csv:
-                csv_files = glob(f"{self.properties["data_path"]}*.tsv")
-                [tsv_to_csv(file, f"{os.path.splitext(file)[0]}.csv") for file in csv_files]
-            return
+        self.data_path = self.properties["data_path"]
 
     def tsv_to_db(self):
 
