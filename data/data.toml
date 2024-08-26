@@ -2,3 +2,8 @@
 name = "pharmgkb"
 download_path = "https://api.pharmgkb.org/v1/download/file/data/clinicalAnnotations.zip"
 data_path = "data/PharmGKB/files/"
+
+[ema]
+name = "ema"
+download_path = "https://www.ema.europa.eu/system/files/documents/other/medicines_output_european_public_assessment_reports_en.xlsx"
+data_path = "data/EMA/files/"
